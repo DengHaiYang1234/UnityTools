@@ -130,14 +130,28 @@ public class AutoBuildCode
 				File.Delete(scriptPath);
 
 				string splitStr = "//auto";
-				string unchangeStr = Regex.Split(classStr, splitStr, RegexOptions.IgnoreCase)[0];
+				string splitStr1 = "//autoEnd";
+				string unChangeUsing = Regex.Split(classStr, splitStr, RegexOptions.IgnoreCase)[0];
 
-				string changeStr = Regex.Split(AutoBuildCodeTemp.UIClass, splitStr, RegexOptions.IgnoreCase)[1];
+				string unChangeStr = Regex.Split(classStr, splitStr1, RegexOptions.IgnoreCase)[1];
+
+				//string changeStr = Regex.Split(AutoBuildCodeTemp.UIClass, splitStr, RegexOptions.IgnoreCase)[1];
+
+				Regex rg = new Regex("(?<=(" + splitStr + "))[.\\s\\S]*?(?=(" + splitStr1 + "))", RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+				string changeStr = rg.Match(AutoBuildCodeTemp.UIClass).Value;
+				//Debug.LogError("changeStr  changeStr:" + changeStr);
+
+				//string unchangeStr = Regex.Split(classStr, splitStr, RegexOptions.IgnoreCase)[0];
+				
+				//string changeStr = Regex.Split(AutoBuildCodeTemp.UIClass, splitStr, RegexOptions.IgnoreCase)[1];
 
 				StringBuilder build = new StringBuilder();
-				build.Append(unchangeStr);
+				build.Append(unChangeUsing);
 				build.Append(splitStr);
 				build.Append(changeStr);
+				build.Append(splitStr1);
+				build.Append(unChangeStr);
+				
 				classStr = build.ToString();
 
 			}

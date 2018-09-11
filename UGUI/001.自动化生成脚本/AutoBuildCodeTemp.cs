@@ -14,15 +14,13 @@ using UnityEngine.EventSystems;
 using System;
 public class #类名#:MonoBehaviour
 {
-	#成员#
 	//auto
+	#成员#
 	public void Start()
 	{
 		#查找#
 	}
-
-
-	
+	//autoEnd
 }
 ";
 
